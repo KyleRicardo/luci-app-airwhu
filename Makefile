@@ -6,8 +6,6 @@ PKG_RELEASE:=1
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)
 
-PO2LMO:=$(BUILD_DIR)/luci/build/po2lmo
-
 include $(INCLUDE_DIR)/package.mk
 
 define Package/luci-app-airwhu
@@ -26,7 +24,7 @@ endef
 define Build/Prepare
 	mkdir -p $(PKG_BUILD_DIR)
 	$(CP) ./* $(PKG_BUILD_DIR)/
-	$(PO2LMO) $(PKG_BUILD_DIR)/po/airwhu.zh-cn.po $(PKG_BUILD_DIR)/po/airwhu.zh-cn.lmo
+	po2lmo $(PKG_BUILD_DIR)/po/airwhu.zh-cn.po $(PKG_BUILD_DIR)/po/airwhu.zh-cn.lmo
 endef  
 
 define Build/Compile

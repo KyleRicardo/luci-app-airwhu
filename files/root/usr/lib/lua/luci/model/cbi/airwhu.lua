@@ -40,11 +40,7 @@ pw.rmempty = false
 
 ifname = s:option(ListValue, "ifname", translate("Interfaces"))
 wan_dev = luci.sys.exec("uci get network.wan.ifname")
-for k, v in ipairs(luci.sys.net.devices()) do
-    if v == wan_dev then
-        ifname:value(v)
-    end
-end
+ifname:value(wan_dev)
 
 
 s:option(Value, "IP", translate("IP"), translate("default to localhost's IP")).default = "0.0.0.0"
