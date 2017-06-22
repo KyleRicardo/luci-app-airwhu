@@ -38,10 +38,10 @@ pw = s:option(Value, "Password", translate("Password"))
 pw.password = true
 pw.rmempty = false
 
-ifname = s:option(ListValue, "ifname", translate("Interfaces"))
 wan_dev = luci.sys.exec("uci get network.wan.ifname")
+wan_dev = string.sub(wan_dev,1,string.len(wan_dev)-1)
+ifname = s:option(ListValue, "ifname", translate("Interfaces"))
 ifname:value(wan_dev)
-
 
 s:option(Value, "IP", translate("IP"), translate("default to localhost's IP")).default = "0.0.0.0"
 
@@ -86,8 +86,7 @@ s:option(Value, "ShowNotify", translate("display notification"), translate("0(no
 s:option(Value, "Version", translate("client version"), translate("default to 0.00,compatible with xrgsu")).default = "0.00"
 
 tmp = s:option(Value, "DataFile", translate("customized data file"), translate("not in used by default"))
-tmp.optional = true
-tmp.rmempty = false
+tmp.rmempty = true
 
 script = s:option(Value, "DHCPScript", translate("DHCP script"), translate("use dhclient by default"))
 script.default = "udhcpc -i "..wan_dev
